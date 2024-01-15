@@ -4,6 +4,12 @@ This repository contains the initial stage of a student project to build a clone
 
 ---
 
+<center><h3>v2 Changelogs</h3> </center>
+
+You can now create new objects with desired attributes by using key=value param.
+Command syntax: create <Class name> <param 1> <param 2> <param 3>.
+Param syntax: <key name>=<value>
+
 <center><h3>Repository Contents by Project Task</h3> </center>
 
 | Tasks | Files | Description |
@@ -36,7 +42,7 @@ This repository contains the initial stage of a student project to build a clone
 5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
 ##### Commands
-    * create - Creates an instance based on given class
+    * create - Creates an instance based on given class.
 
     * destroy - Destroys an object based on class and UUID
 
