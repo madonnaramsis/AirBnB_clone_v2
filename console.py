@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         classArgs = {}
         for arg in argv:
             key, value = arg.split("=", 1)
-            classArgs[key.strip("\"'")] = value.strip("\"'")
+            classArgs[key.strip("\"'")] = value.strip("\"'").replace("_", " ")
         if not className:
             print("** class name missing **")
             return
