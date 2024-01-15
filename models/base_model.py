@@ -53,6 +53,5 @@ class BaseModel:
                         value = int(value)
                 except ValueError:
                     pass
-            if hasattr(self, key):
-                setattr(self, key, value)
+            setattr(self, key, value)
 
