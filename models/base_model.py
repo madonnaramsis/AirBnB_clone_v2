@@ -54,4 +54,3 @@ class BaseModel:
                 except ValueError:
                     pass
             setattr(self, key, value)
-
