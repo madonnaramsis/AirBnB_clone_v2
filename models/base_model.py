@@ -46,11 +46,11 @@ class BaseModel:
     def set(self, *args, **kwargs):
         """sets attributes"""
         for key, value in kwargs.items():
-            if not re.findall("id", key):
-                try:
-                    value = float(value)
-                    if value.is_integer():
-                        value = int(value)
-                except ValueError:
-                    pass
+            # if not re.findall("id", key):
+            try:
+                value = float(value)
+                if value.is_integer():
+                    value = int(value)
+            except ValueError:
+                pass
             setattr(self, key, value)
