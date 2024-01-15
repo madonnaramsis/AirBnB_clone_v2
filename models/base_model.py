@@ -43,14 +43,16 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
 
-    def set(self, *args, **kwargs):
+    def set(self, **kwargs):
         """sets attributes"""
         for key, value in kwargs.items():
-            # if not re.findall("id", key):
-            try:
-                value = float(value)
-                if value.is_integer():
-                    value = int(value)
-            except ValueError:
-                pass
-            setattr(self, key, value)
+            if not re.findall("id", key):
+                try:
+                    value = float(value)
+                    if value.is_integer():
+                        value = int(value)
+                except ValueError:
+                    pass
+            if hasattr(self, key):
+                setattr(self, key, value)
+
