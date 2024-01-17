@@ -25,5 +25,3 @@ place_1 = Place(user_id=user.id, city_id=city.id, name="House 1")
 place_1.save()
 place_2 = Place(user_id=user.id, city_id=city.id, name="House 2")
 place_2.save()
-
-
