@@ -31,8 +31,4 @@ amenity_1 = Amenity(name="Wifi")
 amenity_1.save()
 amenity_2 = Amenity(name="Cable")
 amenity_2.save()
-amenity_3 = Amenity(name="Oven")
 
-# link place_1 with 2 amenities
-place_1.amenities.append(amenity_1)
-place_1.amenities.append(amenity_2)
