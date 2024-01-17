@@ -31,4 +31,3 @@ amenity_1 = Amenity(name="Wifi")
 amenity_1.save()
 amenity_2 = Amenity(name="Cable")
 amenity_2.save()
-
