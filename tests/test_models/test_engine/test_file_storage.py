@@ -2,11 +2,8 @@
 """ Module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+from models import storage
 import os
-
-
-storage = FileStorage()
 
 
 class test_fileStorage(unittest.TestCase):
@@ -24,7 +21,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except Exception:
+        except:
             pass
 
     def test_obj_list_empty(self):
