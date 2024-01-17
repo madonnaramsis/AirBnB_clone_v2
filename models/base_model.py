@@ -4,7 +4,11 @@ import uuid
 import re
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
+from sqlalchemy import (Column, Integer,
+                        String, DateTime,
+                        ForeignKey, Float,
+                        Table
+                        )
 import models
 
 
@@ -24,11 +28,14 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            del kwargs['__class__']
+            try:
+                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
+                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+                                                        '%Y-%m-%dT%H:%M:%S.%f')
+                del kwargs['__class__']
+            except KeyError:
+                pass
             self.set(**kwargs)
             self.__dict__.update(kwargs)
 
