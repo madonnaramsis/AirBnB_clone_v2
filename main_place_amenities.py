@@ -37,4 +37,3 @@ amenity_3.save()
 # link place_1 with 2 amenities
 place_1.amenities.append(amenity_1)
 place_1.amenities.append(amenity_2)
-
