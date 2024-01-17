@@ -26,8 +26,4 @@ place_1.save()
 place_2 = Place(user_id=user.id, city_id=city.id, name="House 2")
 place_2.save()
 
-# creation of 3 various Amenity
-amenity_1 = Amenity(name="Wifi")
-amenity_1.save()
-amenity_2 = Amenity(name="Cable")
-amenity_2.save()
+
