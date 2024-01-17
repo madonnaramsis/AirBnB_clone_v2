@@ -2,7 +2,7 @@
 """ Console Module """
 import cmd
 import sys
-from models.__init__ import storage, type_storage
+from models.__init__ import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -172,10 +172,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            if type_storage == "db":
-                print(storage.all(self.classes[args]))
-            else:
-                print(storage._FileStorage__objects[key])
+            print(storage.all(self.classes[args]))
         except KeyError:
             print("** no instance found **")
 
@@ -219,26 +216,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """Shows all objects, or all objects of a class"""
-        print_list = []
         if args:
             args = args.split(" ")[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            if type_storage == "db":
-                print(storage.all(self.classes[args]))
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    if k.split(".")[0] == args:
-                        print_list.append(str(v))
-                print(print_list)
+            print(storage.all(self.classes[args]))
         else:
-            if type_storage == "db":
-                print(storage.all())
-            else:
-                for k, v in storage._FileStorage__objects.items():
-                    print_list.append(str(v))
-                print(print_list)
+            print(storage.all())
 
     def help_all(self):
         """Help information for the all command"""
@@ -247,13 +232,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, args):
         """Count current number of class instances"""
-        count = 0
-        if type_storage == "db":
-            count = storage.all(self.classes[args])
-        else:
-            for k, v in storage._FileStorage__objects.items():
-                if args == k.split(".")[0]:
-                    count += 1
+        count = storage.all(self.classes[args])
         print(count)
 
     def help_count(self):
