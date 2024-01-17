@@ -2,8 +2,11 @@
 """ Module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
-from models import storage
+from models import FileStorage
 import os
+
+
+storage = FileStorage()
 
 
 class test_fileStorage(unittest.TestCase):
