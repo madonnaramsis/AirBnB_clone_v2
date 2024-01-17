@@ -8,10 +8,3 @@ from models.place import Place
 from models.review import Review
 from models.user import User
 
-# creation of a State
-state = State(name="California")
-state.save()
-
-# creation of a City
-city = City(state_id=state.id, name="San Francisco")
-city.save()
