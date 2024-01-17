@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """ Console Module """
+import os
 import cmd
 import sys
-from models.__init__ import storage, type_storage
+from models.__init__ import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -172,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            if type_storage == "db":
+            if os.getenv('HBNB_TYPE_STORAGE') == "db":
                 print(storage.all(self.classes[args]))
             else:
                 print(storage._FileStorage__objects[key])
@@ -225,7 +226,7 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            if type_storage == "db":
+            if os.getenv('HBNB_TYPE_STORAGE') == "db":
                 print(storage.all(self.classes[args]))
             else:
                 for k, v in storage._FileStorage__objects.items():
@@ -233,7 +234,7 @@ class HBNBCommand(cmd.Cmd):
                         print_list.append(str(v))
                 print(print_list)
         else:
-            if type_storage == "db":
+            if os.getenv('HBNB_TYPE_STORAGE') == "db":
                 print(storage.all())
             else:
                 for k, v in storage._FileStorage__objects.items():
@@ -248,7 +249,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        if type_storage == "db":
+        if os.getenv('HBNB_TYPE_STORAGE') == "db":
             count = storage.all(self.classes[args])
         else:
             for k, v in storage._FileStorage__objects.items():
