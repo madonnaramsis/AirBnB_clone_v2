@@ -2,18 +2,18 @@
 """ Console Module """
 import cmd
 import sys
-from models.base_model import BaseModel
 from models.__init__ import storage
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """Contains the functionality for the HBNB console"""
+    from models.base_model import BaseModel
+    from models.user import User
+    from models.place import Place
+    from models.state import State
+    from models.city import City
+    from models.amenity import Amenity
+    from models.review import Review
 
     # determines prompt for interactive/non-interactive modes
     prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
@@ -172,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.all(self.classes[args]))
         except KeyError:
             print("** no instance found **")
 
@@ -216,21 +216,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """Shows all objects, or all objects of a class"""
-        print_list = []
-
         if args:
             args = args.split(" ")[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split(".")[0] == args:
-                    print_list.append(str(v))
+            print(storage.all(self.classes[args]))
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
-
-        print(print_list)
+            print(storage.all())
 
     def help_all(self):
         """Help information for the all command"""
@@ -239,10 +232,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, args):
         """Count current number of class instances"""
-        count = 0
-        for k, v in storage._FileStorage__objects.items():
-            if args == k.split(".")[0]:
-                count += 1
+        count = storage.all(self.classes[args])
         print(count)
 
     def help_count(self):
