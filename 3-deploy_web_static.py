@@ -48,5 +48,5 @@ def deploy():
     try:
         path = do_pack()
         return do_deploy(path)
-    except Exception:
+    except:
         return False
