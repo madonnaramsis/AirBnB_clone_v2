@@ -46,7 +46,8 @@ def do_deploy(archive_path):
 
 def deploy():
     """Function to full deploy process."""
-    path = do_pack()
-    if path is None:
+    try:
+        path = do_pack()
+        return do_deploy(path)
+    except Exception:
         return False
-    return do_deploy(path)
