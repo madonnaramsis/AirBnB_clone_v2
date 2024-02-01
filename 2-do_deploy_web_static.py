@@ -5,6 +5,8 @@ using the function do_pack."""
 from fabric.api import env, put, run, local
 from datetime import datetime
 from os.path import exists
+env.hosts = ['54.210.173.51', '52.73.37.123']
+env.user = 'ubuntu'
 
 
 def do_pack():
@@ -21,8 +23,6 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Function to deploy."""
-    env.hosts = ['54.210.173.51', '52.73.37.123']
-    env.user = 'ubuntu'
     if not archive_path and not exists(archive_path):
         return False
     try:
