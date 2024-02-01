@@ -23,7 +23,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Function to deploy."""
-    if not archive_path and not exists(archive_path):
+    if not archive_path or not exists(archive_path):
         return False
     try:
         put(archive_path, "/tmp/")
@@ -47,7 +47,8 @@ def do_deploy(archive_path):
 
 def deploy():
     """Function to full deploy process."""
-    path = do_pack()
-    if not path:
+    try:
+        path = do_pack()
+        return do_deploy(path)
+    except:
         return False
-    return do_deploy(path)
