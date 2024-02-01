@@ -2,7 +2,8 @@
 """Fabric script that generates a .tgz archive
 from the contents of the web_static folder
 using the function do_pack."""
-from fabric.api import env, put, run, local
+from fabric.api import local
+from fabric.operations import env, put, run
 from datetime import datetime
 from os.path import exists
 env.hosts = ['54.210.173.51', '52.73.37.123']
