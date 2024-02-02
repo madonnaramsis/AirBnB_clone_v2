@@ -22,7 +22,7 @@ def do_pack():
     try:
         local("tar -cvzf versions/web_static_{}.tgz web_static".format(date))
         return "versions/web_static_{}.tgz".format(date)
-    except Exception:
+    except:
         return None
 
 
@@ -46,7 +46,7 @@ def do_deploy(archive_path):
             .format(name))
         print("New version deployed!")
         return True
-    except Exception:
+    except:
         return False
 
 
