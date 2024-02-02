@@ -5,7 +5,7 @@ using the function do_pack."""
 from fabric.api import env, put, run, local
 from datetime import datetime
 from os.path import exists
-env.hosts = ['54.210.173.51', '52.73.37.123']
+env.hosts = ['100.26.237.224', '100.25.204.41']
 env.user = 'ubuntu'
 
 
