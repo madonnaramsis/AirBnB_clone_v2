@@ -5,8 +5,13 @@ using the function do_pack."""
 from fabric.api import env, put, run, local
 from datetime import datetime
 from os.path import exists
+
 env.hosts = ['54.210.173.51', '52.73.37.123']
 env.user = 'ubuntu'
+
+# Global variable to store the archive path
+archive_path = None
+pack_executed = False
 
 
 def do_pack():
@@ -47,8 +52,13 @@ def do_deploy(archive_path):
 
 def deploy():
     """Function to full deploy process."""
-    try:
-        path = do_pack()
-        return do_deploy(path)
-    except:
+    global archive_path, pack_executed
+
+    if not pack_executed:
+        archive_path = do_pack()
+        pack_executed = True
+
+    if archive_path:
+        return do_deploy(archive_path)
+    else:
         return False
