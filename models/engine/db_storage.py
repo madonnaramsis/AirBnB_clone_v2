@@ -25,6 +25,14 @@ class DBStorage:
     """This class manages storage of hbnb models in mysql"""
     __engine = None
     __session = None
+    __classes = {
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Place': Place,
+        'Review': Review,
+        'User': User
+    }
 
     def __init__(self):
         """Instantiate a DBStorage object"""
@@ -45,15 +53,17 @@ class DBStorage:
         if cls is None:
             objs = self.__session.query(State).all()
             objs += self.__session.query(City).all()
-            # objs += self.__session.query(Amenity).all()
+            objs += self.__session.query(Amenity).all()
             objs += self.__session.query(Place).all()
             objs += self.__session.query(Review).all()
             objs += self.__session.query(User).all()
         else:
+            if isinstance(cls, str):
+                cls = self.__classes.get(cls)
             objs = self.__session.query(cls).all()
         dics = []
         for obj in objs:
-            dics.append(str(obj))
+            dics.append(obj)
         return dics
 
     def new(self, obj):
@@ -75,3 +85,7 @@ class DBStorage:
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         session = scoped_session(Session)
         self.__session = session()
+
+    def close(self):
+        """call remove() method on the private session attribute"""
+        self.__session.close()
